@@ -25,7 +25,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: "bundle exec rails s -b 0.0.0.0"
+    container_name: web
+    command: "bin/dev" # TODO: Split assets/server
+    tty: true
     volumes:
       - .:/rails
       # TODO: Add bundler volume
