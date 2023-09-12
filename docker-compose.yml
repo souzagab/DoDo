@@ -1,0 +1,40 @@
+# Development only!
+
+version: '3'
+
+volumes:
+  pg_data:
+
+networks:
+  dodo:
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
+    networks:
+      - dodo
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "bundle exec rails s -b 0.0.0.0"
+    volumes:
+      - .:/rails
+      # TODO: Add bundler volume
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres://postgres:secret@postgres:5432
+    depends_on:
+      - db
+    networks:
+      - dodo
