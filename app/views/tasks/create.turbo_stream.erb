@@ -1,2 +1,2 @@
-<%= turbo_stream.prepend "tasks", partial: "tasks/task", locals: { task: @task } %>
+<%= turbo_stream.prepend "tasks", @task %>
 <%= turbo_stream.update "new_task", "" %>

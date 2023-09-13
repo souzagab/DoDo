@@ -13,7 +13,9 @@
 
     <%= turbo_frame_tag "new_task" %>
 
-    <div id="tasks" class="min-w-full">
-      <%= render @tasks %>
-    </div>
+    <%= turbo_frame_tag "tasks" do %>
+      <div id="tasks" class="min-w-full">
+        <%= render @tasks %>
+      </div>
+    <% end %>
 </div>
