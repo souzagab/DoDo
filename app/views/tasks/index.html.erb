@@ -11,6 +11,8 @@
             class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
     </div>
 
+    <%= turbo_stream_from "tasks" %>
+
     <%= turbo_frame_tag "new_task" %>
 
     <%= turbo_frame_tag "tasks" do %>
