@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: :desc)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -26,6 +26,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: "Task was successfully created." }
+        format.turbo_stream
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +53,8 @@ class TasksController < ApplicationController
     @task.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
+      format.html { redirect_to tasks_path, notice: "Task was successfully destroyed." }
+      format.turbo_stream
       format.json { head :no_content }
     end
   end

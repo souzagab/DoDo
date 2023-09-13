@@ -1,8 +1,22 @@
-<div id="<%= dom_id task %>" class="flex" >
-  <p class="my-5">
-    <%= link_to task.body, task_path(task), class:"block font-medium mb-1" %>
-  </p>
+<%= turbo_frame_tag task do %>
+  <div id="<%= dom_id task %>" class="flex" >
+    <p class="my-5">
+      <%= link_to task.body,
+            task_path(task),
+            data: { turbo_frame: "_top" },
+            class:"block font-medium mb-1" %>
+    </p>
 
-  <%= link_to "Edit", task_path(task), method: :delete, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to 'Delete', edit_task_path(task), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-</div>
+    <%= link_to 'Edit',
+          edit_task_path(task),
+          class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <%= button_to "Delete",
+          task_path(task),
+          method: :delete,
+          data: {
+            turbo_method: "delete"
+            },
+          class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+<% end %>
