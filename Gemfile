@@ -50,6 +50,16 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+
+  gem "factory_bot_rails", "~> 6.2"
+  gem "bullet", "~> 7.0"
+  gem "annotate", "~> 3.2"
+  gem "faker", "~> 3.2"
+
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-performance", require: false
 end
 
 group :development do
@@ -65,3 +75,12 @@ group :development do
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "rspec-rails", "~> 6.0"
+  gem "shoulda-matchers", "~> 5.3"
+
+  gem "capybara", "~> 3.3"
+  gem "selenium-webdriver", "~> 4.10"
+  gem "webdrivers", "~> 5.3"
+end
