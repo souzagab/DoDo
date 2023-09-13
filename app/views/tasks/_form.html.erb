@@ -5,7 +5,7 @@
 
       <ul>
         <% task.errors.each do |error| %>
-          <li><%= error.full_message.to_sentence.capitalize %></li>
+          <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
