@@ -22,7 +22,7 @@ attach: # Attach to a running container and opens bash
 	docker compose -f $(DEVELOPMENT_PATH) exec app bash
 
 test: # Run rspec tests
-	docker compose -f $(DEVELOPMENT_PATH) run --rm app bundle exec rspec
+	RAILS_ENV=test docker compose -f $(DEVELOPMENT_PATH) run --rm app bundle exec rspec
 
 server: stop # Start the server
 	docker compose -f $(DEVELOPMENT_PATH) up

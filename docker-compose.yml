@@ -42,7 +42,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - RAILS_ENV=development
+      - RAILS_ENV=${RAILS_ENV:-development}
       - DATABASE_URL=postgres://postgres:secret@postgres:5432
     depends_on:
       - db
