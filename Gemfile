@@ -52,7 +52,8 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
 
   gem "factory_bot_rails", "~> 6.2"
-  gem "bullet", "~> 7.0"
+  # TODO: Waiting 7.1 support
+  # gem "bullet", "~> 7.0"
   gem "annotate", "~> 3.2"
   gem "faker", "~> 3.2"
 
