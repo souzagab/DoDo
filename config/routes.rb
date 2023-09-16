@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :tasks do
-    collection do
-      post :search, to: "tasks#index"
-    end
+    post :search, action: :index, on: :collection
   end
 
   root "tasks#index"

@@ -9,10 +9,10 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :index, location: @tasks }
-      format.turbo_stream { render turbo_stream: turbo_stream.update("tasks", search_params[:q]) }
+      format.json
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("tasks", partial: "tasks", locals: { tasks: @tasks }) }
     end
-  end 
+  end
 
   # GET /tasks/1 or /tasks/1.json
   def show; end

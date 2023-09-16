@@ -5,7 +5,7 @@
     </p>
   <% end %>
 
-  <%= form_with url: search_tasks_path, method: :post do |f| %>
+  <%= form_with url: search_tasks_path, method: :post, data: { turbo_frame: "tasks", turbo_action: "replace" } do |f| %>
     <div class="relative w-full max-w-lg transform px-4 transition-all opacity-100 scale-100">
       <div class="overflow-hidden rounded-lg bg-white shadow-md" id="headlessui-dialog-panel-117" data-headlessui-state="open">
         <div class="relative">
@@ -43,9 +43,5 @@
 
   <%= turbo_frame_tag "new_task" %>
 
-  <%= turbo_frame_tag "tasks" do %>
-    <div id="tasks" class="min-w-full">
-      <%= render @tasks %>
-    </div>
-  <% end %>
+  <%= render 'tasks' %>
 </div>
