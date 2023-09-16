@@ -2,8 +2,16 @@ class TasksController < ApplicationController
   before_action :find_task!, only: %i[show edit update destroy]
 
   # GET /tasks or /tasks.json
+  # POST /tasks/search
   def index
-    @tasks = Task.order(created_at: :desc)
+    @tasks = Task.search(search_params)
+                 .order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.json
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("tasks", partial: "tasks", locals: { tasks: @tasks }) }
+    end
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -67,6 +75,10 @@ class TasksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:body)
+  end
+
+  def search_params
+    params.permit(:q)
   end
 
 end

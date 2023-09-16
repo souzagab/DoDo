@@ -1,7 +1,5 @@
-GIT
-  remote: https://github.com/rails/rails.git
-  revision: 699dfdb42635faf6d40ff2405b2f0a615b1c54ed
-  branch: main
+GEM
+  remote: https://rubygems.org/
   specs:
     actioncable (7.1.0.beta1)
       actionpack (= 7.1.0.beta1)
@@ -76,32 +74,6 @@ GIT
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
-    rails (7.1.0.beta1)
-      actioncable (= 7.1.0.beta1)
-      actionmailbox (= 7.1.0.beta1)
-      actionmailer (= 7.1.0.beta1)
-      actionpack (= 7.1.0.beta1)
-      actiontext (= 7.1.0.beta1)
-      actionview (= 7.1.0.beta1)
-      activejob (= 7.1.0.beta1)
-      activemodel (= 7.1.0.beta1)
-      activerecord (= 7.1.0.beta1)
-      activestorage (= 7.1.0.beta1)
-      activesupport (= 7.1.0.beta1)
-      bundler (>= 1.15.0)
-      railties (= 7.1.0.beta1)
-    railties (7.1.0.beta1)
-      actionpack (= 7.1.0.beta1)
-      activesupport (= 7.1.0.beta1)
-      irb
-      rackup (>= 1.0.0)
-      rake (>= 12.2)
-      thor (~> 1.0, >= 1.2.2)
-      zeitwerk (~> 2.6)
-
-GEM
-  remote: https://rubygems.org/
-  specs:
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     annotate (3.2.0)
@@ -203,6 +175,20 @@ GEM
     rackup (2.1.0)
       rack (>= 3)
       webrick (~> 1.8)
+    rails (7.1.0.beta1)
+      actioncable (= 7.1.0.beta1)
+      actionmailbox (= 7.1.0.beta1)
+      actionmailer (= 7.1.0.beta1)
+      actionpack (= 7.1.0.beta1)
+      actiontext (= 7.1.0.beta1)
+      actionview (= 7.1.0.beta1)
+      activejob (= 7.1.0.beta1)
+      activemodel (= 7.1.0.beta1)
+      activerecord (= 7.1.0.beta1)
+      activestorage (= 7.1.0.beta1)
+      activesupport (= 7.1.0.beta1)
+      bundler (>= 1.15.0)
+      railties (= 7.1.0.beta1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -210,6 +196,14 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    railties (7.1.0.beta1)
+      actionpack (= 7.1.0.beta1)
+      activesupport (= 7.1.0.beta1)
+      irb
+      rackup (>= 1.0.0)
+      rake (>= 12.2)
+      thor (~> 1.0, >= 1.2.2)
+      zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.0.6)
     rdoc (6.5.0)
@@ -260,7 +254,7 @@ GEM
     rubocop-performance (1.19.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.21.0)
+    rubocop-rails (2.21.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
@@ -331,7 +325,7 @@ DEPENDENCIES
   jbuilder
   pg
   puma (>= 5.0)
-  rails!
+  rails (~> 7.1.0.beta1)
   redis (>= 4.0.1)
   rspec-rails (~> 6.0)
   rubocop
