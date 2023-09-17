@@ -1,7 +1,24 @@
 RSpec.describe Task do
+  subject(:task) { build(:task) }
+
+  context "associations"
+  describe "attributes" do
+    it do
+      expect(task).to define_enum_for(:status)
+          .backed_by_column_of_type(:enum)
+          .with_values(open: "open", closed: "closed", archived: "archived")
+    end
+  end
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:body) }
+
+    describe "due_date" do
+      it "is expected to be greater than or equal to today" do
+        task.due_date = 1.day.ago
+        expect(task).not_to be_valid
+      end
+    end
   end
 
   describe ".search" do
