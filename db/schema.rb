@@ -16,11 +16,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_09_12_231308) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "status", ["draft", "open", "closed", "archived"]
+  create_enum "task_status", ["draft", "open", "closed", "archived"]
 
   create_table "tasks", force: :cascade do |t|
     t.string "body", null: false
-    t.enum "status", default: "open", null: false, enum_type: "status"
+    t.enum "status", default: "open", null: false, enum_type: "task_status"
     t.datetime "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
