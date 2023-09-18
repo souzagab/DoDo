@@ -6,6 +6,7 @@ importScripts(
 const { CacheFirst, NetworkFirst } = workbox.strategies
 const { registerRoute } = workbox.routing
 
+// Cache
 registerRoute(
     ({ request }) => request.destination === 'image',
     new CacheFirst({ cacheName: 'images' })
@@ -21,16 +22,22 @@ registerRoute(
     new NetworkFirst({ cacheName: 'pages' })
 )
 
+
+// Lifecycle callbacks
 function onInstall(event) {
-    console.log('[Service-worker]', "Installing!", event);
+    // console.log('[Service-worker]', "Installing!", event);
 }
 
 function onActivate(event) {
-    console.log('[Service-worker]', "Activating!", event);
+    // console.log('[Service-worker]', "Activating!", event)
+
+    event.waitUntil(caches.keys().then((keys) => {
+        return Promise.all(keys.map((key) => caches.delete(key)))
+    }))
 }
 
 function onFetch(event) {
-    console.log('[Service-worker]', "Fetching!", event);
+    // console.log('[Service-worker]', "Fetching!", event);
 }
 
 self.addEventListener('install', onInstall)
