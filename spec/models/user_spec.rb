@@ -9,10 +9,10 @@ RSpec.describe User do
   end
 
   describe "validations" do
-    xdescribe "uniqueness" do
+    describe "uniqueness" do
       subject(:user) { create(:user) }
 
-      it { is_expected.to validate_uniqueness_of(:email) }
+      it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     end
 
     it { is_expected.to validate_presence_of(:email) }

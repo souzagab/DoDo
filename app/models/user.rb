@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  before_create :unverify_email, if: :email_changed?
+  before_create :contest_email, if: :email_changed?
   after_update :erase_all_sessions, if: :saved_change_to_password_digest?
 
   has_many :email_verification_tokens, dependent: :destroy
@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 8 }
 
-  normalizes :email, with: -> email { email.strip.downcase }
+  normalizes :email, with: ->(email) { email.strip.downcase }
 
   private
 
@@ -19,7 +19,7 @@ class User < ApplicationRecord
     sessions.where.not(id: Current.session).delete_all
   end
 
-  def unverify_email
+  def contest_email
     self.verified = false
   end
 end
