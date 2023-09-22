@@ -4,7 +4,8 @@ async function registerServiceWorker() {
   try {
     await navigator.serviceWorker.register("/service-worker.js", { scope: "/" })
   } catch (e) {
-    console.error("Service worker registration failed", e)
+    console.warn("Service worker registration failed", e)
+    throw e
   }
 }
 
@@ -20,8 +21,9 @@ async function startServiceWorker(){
 
   if (await requestNotificationPermission()) {
     const subscription = await getPushSubscription()
+    if (!subscription) return console.warn("No subscription active")
 
-    return sendSubscriptionToServer(subscription)
+    await sendSubscriptionToServer(subscription)
   }
 }
 
@@ -39,8 +41,15 @@ async function getPushSubscription() {
 }
 
 async function sendSubscriptionToServer(subscription) {
-  // TODO: post request to save subscription
-  console.table(subscription)
+  return console.log(JSON.stringify({ device: subscription.toJSON() }))
+  // return fetch("/devices", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "X-CSRF-Token": document.head.querySelector('meta[name="csrf-token"]').getAttribute("content")
+  //   },
+  //   body: JSON.stringify({ device: subscription.toJSON() })
+  // })
 }
 
 startServiceWorker()
