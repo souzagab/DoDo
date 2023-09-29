@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   # PWA
   get "/service-worker.js" => "service_worker#service_worker"
   get "/manifest.json" => "service_worker#manifest"
+  resources :devices, only: :create
 end

@@ -33,3 +33,7 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 .idea/
+.env
+
+# Local certificate
+config/ssl/*

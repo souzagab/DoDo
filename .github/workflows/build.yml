@@ -39,6 +39,9 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+      - name: Copy config files
+        run: |
+          cp .env.sample .env
       - name: Run RSpec
         env:
           RAILS_ENV: test

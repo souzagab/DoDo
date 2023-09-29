@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_09_19_223946) do
+ActiveRecord::Schema[7.1].define(version: 2023_09_29_003114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "task_status", ["draft", "open", "closed", "archived"]
+
+  create_table "devices", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "endpoint", null: false
+    t.string "p256dh"
+    t.string "auth"
+    t.datetime "expiration_time", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endpoint"], name: "index_devices_on_endpoint"
+    t.index ["user_id"], name: "index_devices_on_user_id"
+  end
 
   create_table "email_verification_tokens", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -43,9 +55,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_09_19_223946) do
     t.datetime "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["body"], name: "index_tasks_on_body"
     t.index ["due_date"], name: "index_tasks_on_due_date"
     t.index ["status"], name: "index_tasks_on_status"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,7 +71,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_09_19_223946) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "devices", "users"
   add_foreign_key "email_verification_tokens", "users"
   add_foreign_key "password_reset_tokens", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "tasks", "users"
 end

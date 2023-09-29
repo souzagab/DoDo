@@ -6,6 +6,8 @@ RSpec.describe User do
     it { is_expected.to have_many(:email_verification_tokens).dependent(:destroy) }
     it { is_expected.to have_many(:password_reset_tokens).dependent(:destroy) }
     it { is_expected.to have_many(:sessions).dependent(:destroy) }
+    it { is_expected.to have_many(:registered_devices).class_name("Device").dependent(:destroy) }
+    it { is_expected.to have_many(:tasks).dependent(:destroy) }
   end
 
   describe "validations" do
