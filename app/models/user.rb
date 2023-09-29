@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :password_reset_tokens, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :registered_devices, class_name: "Device", dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 8 }
