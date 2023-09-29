@@ -7,20 +7,20 @@ const { CacheFirst, NetworkFirst } = workbox.strategies
 const { registerRoute } = workbox.routing
 
 // Cache
-registerRoute(
-    ({ request }) => request.destination === 'image',
-    new CacheFirst({ cacheName: 'images' })
-)
-
-registerRoute(
-    ({ request }) => request.destination === 'script' || request.destination === 'style',
-    new CacheFirst({ cacheName: 'assets' })
-)
-
-registerRoute(
-    ({ request }) => request.destination === 'document',
-    new NetworkFirst({ cacheName: 'pages' })
-)
+// registerRoute(
+//     ({ request }) => request.destination === 'image',
+//     new CacheFirst({ cacheName: 'images' })
+// )
+//
+// registerRoute(
+//     ({ request }) => request.destination === 'script' || request.destination === 'style',
+//     new CacheFirst({ cacheName: 'assets' })
+// )
+//
+// registerRoute(
+//     ({ request }) => request.destination === 'document',
+//     new NetworkFirst({ cacheName: 'pages' })
+// )
 
 
 // Lifecycle callbacks
