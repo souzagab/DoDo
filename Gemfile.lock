@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/souzagab/webpush.git
+  revision: 409b5148b6af06366b15781d17992a6b4658c992
+  branch: openssl-3
+  specs:
+    webpush (1.1.0)
+      hkdf (~> 0.2)
+      jwt (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -308,9 +317,6 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0, < 4.11)
-    webpush (1.1.0)
-      hkdf (~> 0.2)
-      jwt (~> 2.0)
     webrick (1.8.1)
     websocket (1.2.10)
     websocket-driver (0.7.6)
@@ -353,7 +359,7 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers (~> 5.3)
-  webpush (~> 1.1)
+  webpush!
 
 RUBY VERSION
    ruby 3.2.2p53
