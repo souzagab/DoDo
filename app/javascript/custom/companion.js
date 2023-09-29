@@ -41,15 +41,14 @@ async function getPushSubscription() {
 }
 
 async function sendSubscriptionToServer(subscription) {
-  return console.log(JSON.stringify({ device: subscription.toJSON() }))
-  // return fetch("/devices", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "X-CSRF-Token": document.head.querySelector('meta[name="csrf-token"]').getAttribute("content")
-  //   },
-  //   body: JSON.stringify({ device: subscription.toJSON() })
-  // })
+  return fetch("/devices", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": document.head.querySelector('meta[name="csrf-token"]').getAttribute("content")
+    },
+    body: JSON.stringify({ device: subscription.toJSON() })
+  })
 }
 
 startServiceWorker()
