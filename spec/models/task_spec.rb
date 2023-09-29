@@ -1,7 +1,10 @@
 RSpec.describe Task do
   subject(:task) { build(:task) }
 
-  context "associations"
+  describe "associations" do
+    it { is_expected.to belong_to(:user) }
+  end
+
   describe "attributes" do
     it do
       expect(task).to define_enum_for(:status)
