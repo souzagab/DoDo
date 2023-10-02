@@ -43,7 +43,7 @@ class Task < ApplicationRecord
         private_key: ENV.fetch("VAPID_PRIVATE_KEY")
       }
 
-    ::Webpush.payload_send(
+    ::WebPush.payload_send(
       message: message,
       endpoint: device.endpoint,
       p256dh: device.p256dh,
