@@ -50,8 +50,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Push notifications
-# TODO: Add openssl3 support https://github.com/zaru/webpush/pull/106
-gem "webpush", github: "souzagab/webpush", branch: "openssl-3"
+gem "web-push", "~> 3.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -91,5 +90,3 @@ group :test do
   gem "selenium-webdriver", "~> 4.10"
   gem "webdrivers", "~> 5.3"
 end
-
-
