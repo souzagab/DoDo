@@ -27,21 +27,27 @@ class Task < ApplicationRecord
     user.registered_devices.each do |device|
       Rails.logger.info "Sending notification to #{device.endpoint}"
       begin
-        Webpush.payload_send(
-          message: "New task: #{body}",
-          endpoint: device.endpoint,
-          p256dh: device.p256dh,
-          auth: device.auth,
-          vapid: {
-            subject: "mailto:test@dododo.do",
-            public_key: ENV.fetch("VAPID_PUBLIC_KEY"),
-            private_key: ENV.fetch("VAPID_PRIVATE_KEY")
-          }
-        )
+        retries ||= 0
+        notify!(device)
       rescue => e
         Rails.logger.error "Invalid subscription: #{e}"
         device.destroy
+        retry if (retries += 1) < 5
       end
     end
+  end
+
+  def notify!(device)
+    Webpush.payload_send(
+      message: "New task: #{body}",
+      endpoint: device.endpoint,
+      p256dh: device.p256dh,
+      auth: device.auth,
+      vapid: {
+        subject: "mailto:test@dododo.do",
+        public_key: ENV.fetch("VAPID_PUBLIC_KEY"),
+        private_key: ENV.fetch("VAPID_PRIVATE_KEY")
+      }
+    )
   end
 end
