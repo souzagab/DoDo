@@ -29,7 +29,7 @@ function onInstall(event) {
 }
 
 function onActivate(event) {
-    // console.log('[Service-worker]', "Activating!", event)
+
 
     event.waitUntil(caches.keys().then((keys) => {
         return Promise.all(keys.map((key) => caches.delete(key)))
@@ -40,6 +40,11 @@ function onFetch(event) {
     // console.log('[Service-worker]', "Fetching!", event);
 }
 
+self.addEventListener('activate', () => {
+  clients.claim()
+})
+
 self.addEventListener('install', onInstall)
-self.addEventListener('activate', onActivate)
+
+
 self.addEventListener('fetch', onFetch)
