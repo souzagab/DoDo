@@ -19,20 +19,24 @@ class Task < ApplicationRecord
   private
 
   def send_notification
-    return if user.registered_devices.empty?
+    if user.registered_devices.empty?
+      Rails.logger.info "No registered devices for #{user.email}"
+      return
+    end
 
-    device = user.registered_devices.last
-
-    Webpush.payload_send(
-      message: "New task: #{body}",
-      endpoint: device.endpoint,
-      p256dh: device.p256dh,
-      auth: device.auth,
-      vapid: {
-        subject: "mailto:test@dododo.do",
-        public_key: ENV.fetch("VAPID_PUBLIC_KEY"),
-        private_key: ENV.fetch("VAPID_PRIVATE_KEY")
-      }
-    )
+    user.registered_devices.each do |device|
+      Rails.logger.info "Sending notification to #{device.endpoint}"
+      Webpush.payload_send(
+        message: "New task: #{body}",
+        endpoint: device.endpoint,
+        p256dh: device.p256dh,
+        auth: device.auth,
+        vapid: {
+          subject: "mailto:test@dododo.do",
+          public_key: ENV.fetch("VAPID_PUBLIC_KEY"),
+          private_key: ENV.fetch("VAPID_PRIVATE_KEY")
+        }
+      )
+    end
   end
 end
