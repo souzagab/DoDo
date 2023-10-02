@@ -43,14 +43,14 @@ class Task < ApplicationRecord
         private_key: ENV.fetch("VAPID_PRIVATE_KEY")
       }
 
-    Webpush.payload_send(
+    ::Webpush.payload_send(
       message: message,
       endpoint: device.endpoint,
       p256dh: device.p256dh,
       auth: device.auth,
       vapid: credentials
     )
-  rescue WebPush::ExpiredSubscription => e
+  rescue ::WebPush::ExpiredSubscription => e
     Rails.logger.info "Expired subscription for #{device.endpoint}, error: #{e.inspect}"
     device.destroy
   end
