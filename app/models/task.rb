@@ -35,7 +35,7 @@ class Task < ApplicationRecord
       title: "New task!",
       body: body,
       url: Rails.application.routes.url_helpers.task_url(self)
-    }
+    }.to_json
 
     credentials =  {
         subject: "mailto:test@dododo.co",
