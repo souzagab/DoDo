@@ -51,5 +51,9 @@ async function sendSubscriptionToServer(subscription) {
   })
 }
 
-startServiceWorker()
-  .then(() => { console.log("Service Worker Started")})
+
+try {
+  startServiceWorker().then(() => { console.log("Service Worker Started") })
+} catch (e) {
+  console.warn("Service worker registration failed", e)
+}
