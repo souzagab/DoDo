@@ -22,7 +22,10 @@ async function requestNotificationPermission() {
   try {
     const result = await Notification.requestPermission()
     console.log("#requestPermission: Notification permission request result", result);
-    return result === "granted"
+    if (result === "granted") {
+      allowAlert.style.display = "none"
+      return true
+    }
   } catch (e) {
     console.warn("#requestPermission: Notification permission request failed", e);
     throw e
@@ -83,12 +86,27 @@ async function sendSubscriptionToServer(subscription) {
   }
 }
 
-(async () => {
-  try {
-    await startServiceWorker().then(() => {
-      console.info("Service Worker initialized");
+
+const allowButton = document.querySelector("#allow_notifications")
+const allowAlert = document.querySelector("#allow_notifications_alert")
+
+if (typeof Notification !== "undefined") {
+  if (Notification.permission === "denied") {
+    allowAlert.style.display = "none"
+  } else if (Notification.permission === "granted") {
+    startServiceWorker().then(() => {
+      allowAlert.style.display = "none"
     })
-  } catch (e) {
-    console.warn("Service Worker initialization failed", e);
+  } else {
+    allowAlert.style.display = "flex"
   }
-})()
+
+  allowButton.addEventListener("click", async () => {
+    if (await requestNotificationPermission()) {
+      startServiceWorker().then(() => {
+        console.info("#allowButton: Service Worker initialized");
+        allowAlert.style.display = "none"
+    })
+    }
+  })
+}
