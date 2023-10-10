@@ -33,18 +33,18 @@ class Task < ApplicationRecord
   def notify!(device)
     message = {
       title: "New task!",
-      body: body,
+      body:,
       url: Rails.application.routes.url_helpers.task_url(self)
     }.to_json
 
-    credentials =  {
-        subject: "mailto:test@dododo.co",
+    credentials = {
+      subject: "mailto:test@dododo.co",
         public_key: ENV.fetch("VAPID_PUBLIC_KEY"),
         private_key: ENV.fetch("VAPID_PRIVATE_KEY")
-      }
+    }
 
     ::WebPush.payload_send(
-      message: message,
+      message:,
       endpoint: device.endpoint,
       p256dh: device.p256dh,
       auth: device.auth,
