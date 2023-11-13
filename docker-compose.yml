@@ -11,7 +11,6 @@ networks:
 services:
   db:
     image: postgres:15-alpine
-    container_name: postgres
     volumes:
       - pg_data:/var/lib/postgresql/data
     environment:
@@ -29,24 +28,24 @@ services:
     networks:
       - dodo
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: web
-    command: "bin/dev" # TODO: Split assets/server
-    tty: true
-    volumes:
-      - .:/rails
-      # TODO: Add bundler volume
-    ports:
-      - "3000:3000"
-    environment:
-      - RAILS_ENV=${RAILS_ENV:-development}
-      - DATABASE_URL=postgres://postgres:secret@postgres:5432
-      - REDIS_URL=redis://redis:6379/1
-    depends_on:
-      - db
-      - redis
-    networks:
-      - dodo
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: web
+  #   command: "bin/dev" # TODO: Split assets/server
+  #   tty: true
+  #   volumes:
+  #     - .:/rails
+  #     # TODO: Add bundler volume
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - RAILS_ENV=${RAILS_ENV:-development}
+  #     - DATABASE_URL=postgres://postgres:secret@postgres:5432
+  #     - REDIS_URL=redis://redis:6379/1
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   networks:
+  #     - dodo
