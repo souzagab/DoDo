@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  RUBY_VERSION: 3.2
+  RUBY_VERSION: 3.3
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
