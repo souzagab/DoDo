@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   def edit; end
 
   # POST /tasks or /tasks.json
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
