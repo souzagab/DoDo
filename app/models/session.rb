@@ -6,7 +6,7 @@ class Session < ApplicationRecord
   private
 
   def set_request_details
-    Current.user_agent = Current.user_agent
-    Current.ip_address = Current.ip_address
+    self.user_agent = Current.user_agent
+    self.ip_address = Current.ip_address
   end
 end
