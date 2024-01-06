@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "3.3"
 
 # Use main development branch of Rails
 gem "rails", "~> 7.1" # github: "rails/rails", branch: "main"
@@ -67,6 +67,5 @@ group :test do
   gem "shoulda-matchers", "~> 5.3"
 
   gem "capybara", "~> 3.3"
-  gem "selenium-webdriver", "~> 4.10"
-  gem "webdrivers", "~> 5.3"
+  gem "selenium-webdriver", "~> 4.11"
 end
