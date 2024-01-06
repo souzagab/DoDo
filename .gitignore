@@ -37,3 +37,4 @@
 
 # Local certificate
 config/ssl/*
+config/credentials.yml.enc
