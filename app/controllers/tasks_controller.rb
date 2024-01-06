@@ -4,8 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   # POST /tasks/search
   def index
-    @tasks = Task.search(search_params)
-                 .order(created_at: :desc)
+    @tasks = current_user.tasks.search(search_params).order(created_at: :desc)
 
     respond_to do |format|
       format.html
@@ -27,7 +26,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save

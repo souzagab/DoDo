@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.3"
 
 # Use main development branch of Rails
-gem "rails", "~> 7.1" # github: "rails/rails", branch: "main"
+gem "rails", github: "rails/rails", branch: "main"
 
 gem "propshaft"
 gem "pg"
@@ -46,6 +46,7 @@ group :development, :test do
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-performance", require: false
+  gem "brakeman", require: false
 end
 
 group :development do
