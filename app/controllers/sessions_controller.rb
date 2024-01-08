@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
   def new; end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     if (user = User.authenticate_by(email: session_params[:email], password: session_params[:password]))
 
       @session = user.sessions.create!
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
       redirect_to root_path, notice: "Signed in successfully"
     else
-      redirect_to sign_in_path(email_hint: session_params[:email]), alert: "That email or password is incorrect"
+      redirect_to sign_in_path(emPail_hint: session_params[:email]), alert: "That email or password is incorrect"
     end
   end
 

@@ -2,7 +2,7 @@ async function registerServiceWorker() {
   if (!navigator.serviceWorker) return
 
   try {
-    await navigator.serviceWorker.register("/service-worker.js", { scope: "/" })
+    await navigator.serviceWorker.register("/service-worker", { scope: "/" })
   } catch (e) {
     console.warn("Service worker registration failed", e)
     throw e

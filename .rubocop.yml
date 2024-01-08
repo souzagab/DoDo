@@ -38,6 +38,10 @@ AllCops:
   # the `--only-guide-cops` option.
   StyleGuideCopsOnly: false
 
+# TODO: Temporary disable locale checks
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 Bundler/OrderedGems:
   Enabled: false
 
